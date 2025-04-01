@@ -18,7 +18,7 @@ cmds = [
 ]
 
 [start]
-cmd = "chmod -R 755 . && . venv/bin/activate && python manage.py runserver 0.0.0.0:${PORT:-8000}"
+cmd = "chmod -R 755 . && . venv/bin/activate && gunicorn todo_site.wsgi:application --bind 0.0.0.0:${PORT:-3000}"  # Updated to use gunicorn
 
 [variables]
 PORT = "3000"
