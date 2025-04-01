@@ -4,19 +4,21 @@ nixPkgs = ["python311"]
 [phases.install]
 cmds = [
   "python -m venv venv",
+  "chmod +x venv/bin/activate",  # Ensuring the virtual environment activation script is executable
   ". venv/bin/activate && pip install --upgrade pip",
   ". venv/bin/activate && pip install -r requirements.txt"
 ]
 
 [phases.build]
 cmds = [
+  "chmod -R 755 .",  # Grant read/write/execute permissions to all files in the project
   ". venv/bin/activate && python manage.py makemigrations",
   ". venv/bin/activate && python manage.py migrate",
   ". venv/bin/activate && python manage.py collectstatic --noinput"
 ]
 
 [start]
-cmd = ". venv/bin/activate && python manage.py runserver 0.0.0.0:${PORT:-8000}"
+cmd = "chmod -R 755 . && . venv/bin/activate && python manage.py runserver 0.0.0.0:${PORT:-8000}"
 
 [variables]
 PORT = "8000"
