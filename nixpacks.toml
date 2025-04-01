@@ -1,0 +1,23 @@
+[phases.setup]
+nixPkgs = ["python311"]
+
+[phases.install]
+cmds = [
+  "python -m venv venv",
+  "source venv/bin/activate",
+  "source venv/bin/activate && python -m pip install --upgrade pip",
+  "source venv/bin/activate && pip install -r requirements.txt"
+]
+
+[phases.build]
+cmds = [
+  "source venv/bin/activate && python manage.py collectstatic --noinput",
+  "source venv/bin/activate && python manage.py makemigrations",
+  "source venv/bin/activate && python manage.py migrate"
+]
+
+[start]
+cmd = "source venv/bin/activate && python manage.py runserver 0.0.0.0:$PORT"
+
+[variables]
+PORT = "8000"
