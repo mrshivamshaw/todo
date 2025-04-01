@@ -21,7 +21,7 @@ cmds = [
 cmd = "chmod -R 755 . && . venv/bin/activate && python manage.py runserver 0.0.0.0:${PORT:-8000}"
 
 [variables]
-PORT = "8000"
+PORT = "3000"
 PYTHONUNBUFFERED = "1"
 DEBUG = "False"
 ALLOWED_HOSTS = "z88wo4k88484w8w0kg4sck8s.69.62.73.79.sslip.io,localhost,127.0.0.1"
